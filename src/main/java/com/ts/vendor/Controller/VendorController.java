@@ -26,10 +26,10 @@ public class VendorController {
 
     // TESTING PURPOSES
     @GetMapping(value = "/categories")
-    @ResponseBody ResponseEntity<Iterable<Category>> getAllCategories() {
+    Iterable<Category> getAllCategories() {
         // retrieves all categories from the category microservice using feign
 
-        return categoryClient.getAllCategories();
+        return categoryClient.getCategoryList();
     }
 
 

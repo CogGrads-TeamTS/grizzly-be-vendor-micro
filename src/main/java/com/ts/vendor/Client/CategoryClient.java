@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Repository
 @FeignClient(name = "category-service")
 public interface CategoryClient {
-    @GetMapping
-    @ResponseBody ResponseEntity<Iterable<Category>> getAllCategories();
+    @GetMapping(value = "categorylist")
+    Iterable<Category> getCategoryList();
 }
