@@ -1,6 +1,8 @@
 package com.ts.vendor.Controller;
 
 import com.netflix.ribbon.proxy.annotation.Http;
+import com.ts.vendor.Client.CategoryClient;
+import com.ts.vendor.Model.Category;
 import com.ts.vendor.Model.Vendor;
 import com.ts.vendor.Repository.VendorRepository;
 import com.ts.vendor.Service.VendorService;
@@ -19,6 +21,18 @@ public class VendorController {
 
     @Autowired
     private VendorService vendorService;
+
+    @Autowired
+    private CategoryClient categoryClient;
+
+    // TESTING PURPOSES
+    @GetMapping(value = "/categories")
+    Iterable<Category> getAllCategories() {
+        // retrieves all categories from the category microservice using feign
+
+        return categoryClient.getCategoryList();
+    }
+
 
     @GetMapping(value = "/page")
     public Page<Vendor> findBySearchTerm(@RequestParam("search") String searchTerm, Pageable pageable) {
