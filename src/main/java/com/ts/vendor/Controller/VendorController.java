@@ -1,5 +1,6 @@
 package com.ts.vendor.Controller;
 
+import com.netflix.ribbon.proxy.annotation.Http;
 import com.ts.vendor.Client.CategoryClient;
 import com.ts.vendor.Model.Category;
 import com.ts.vendor.Model.Vendor;
@@ -39,6 +40,31 @@ public class VendorController {
         Page <Vendor> vendorPage = vendorService.findBySearchTerm(searchTerm, pageable);
 
         return vendorPage;
+    }
+
+    @PostMapping(value = "/add", headers = "Content-Type=application/json")
+    public ResponseEntity addNewVendor (@RequestBody Vendor vendor) {
+
+        vendorRepository.save(vendor);
+
+        return new ResponseEntity<>(vendor, HttpStatus.CREATED);
+    }
+
+    @PostMapping(path="/add")
+    public ResponseEntity addNewVendor (@RequestParam String name, @RequestParam String about, @RequestParam String email, @RequestParam String webpage,
+                                        @RequestParam String contact, @RequestParam String address, @RequestParam String portfolioURL) {
+
+        Vendor vendor = new Vendor();
+        vendor.setName(name);
+        vendor.setAbout(about);
+        vendor.setEmail(email);
+        vendor.setWebpage(webpage);
+        vendor.setContact(contact);
+        vendor.setAddress(address);
+        vendor.setPortfolioURL(portfolioURL);
+        vendorRepository.save(vendor);
+
+        return new ResponseEntity<>(vendor, HttpStatus.CREATED);
     }
 
     @GetMapping
