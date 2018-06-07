@@ -1,7 +1,7 @@
 package com.ts.vendor.Service;
 
 import com.ts.vendor.Model.Vendor;
-import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
