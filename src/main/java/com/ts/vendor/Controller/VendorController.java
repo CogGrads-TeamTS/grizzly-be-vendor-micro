@@ -75,4 +75,11 @@ public class VendorController {
 
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteVendor(@PathVariable long id) {
+        vendorRepository.deleteById(id);
+
+        return new ResponseEntity<>("Deleted vendor@{" + id + "} successfully", HttpStatus.OK);
+    }
 }
