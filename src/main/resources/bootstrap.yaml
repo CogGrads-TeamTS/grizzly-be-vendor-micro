@@ -1,5 +1,18 @@
 spring:
   application:
     name: vendor-service
+  cloud:
+    config:
+      discovery:
+        # looks for config service on the naming service and uses that as the config server
+        enabled: true
+        service-id: config-service
+      uri: http://ts.ausgrads.academy:8765/config/
+
+
 server:
   port: 4444
+eureka:
+  client:
+    service-url:
+      defaultZone: http://naming:8761/eureka/
