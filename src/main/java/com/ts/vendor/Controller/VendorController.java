@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @CrossOrigin
 public class VendorController {
@@ -50,6 +52,8 @@ public class VendorController {
         return new ResponseEntity<>(vendor, HttpStatus.CREATED);
     }
 
+
+
     @PostMapping(path="/add")
     public ResponseEntity addNewVendor (@RequestParam String name, @RequestParam String about, @RequestParam String email, @RequestParam String webpage,
                                         @RequestParam String contact, @RequestParam String address, @RequestParam String portfolioURL) {
@@ -67,6 +71,18 @@ public class VendorController {
         return new ResponseEntity<>(vendor, HttpStatus.CREATED);
     }
 
+    @PutMapping(path="/edit/{id}")
+    public ResponseEntity editVendor(@PathVariable long id, @RequestBody Vendor vendor) {
+
+        Optional<Vendor> vendorOptional = vendorRepository.findById(id);
+
+        vendor.setId(id);
+
+        vendorRepository.save(vendor);
+
+        return new ResponseEntity<>("Vendor @{" + id + "} updated successfully!", HttpStatus.OK);
+    }
+
     @GetMapping
     public @ResponseBody
     ResponseEntity<Iterable<Vendor>> getAllUsers() {
@@ -75,6 +91,7 @@ public class VendorController {
 
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteVendor(@PathVariable long id) {
