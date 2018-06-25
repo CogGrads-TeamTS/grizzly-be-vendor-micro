@@ -16,4 +16,8 @@ public interface VendorRepository extends CrudRepository<Vendor, Long>, PagingAn
             "LOWER(c.contact) LIKE LOWER(CONCAT('%',:search, '%'))")
 
     Page<Vendor> findBySearchTerm(@Param("search") String searchTerm, Pageable pageable);
+
+    @Query("SELECT v FROM Vendor v WHERE " +
+            "LOWER(v.name) LIKE LOWER(CONCAT('%', :search, '%'))")
+    Page<Vendor> findNameBySearchTerm(@Param("search") String searchTerm, Pageable pageable);
 }

@@ -8,11 +8,13 @@ import com.ts.vendor.Repository.VendorRepository;
 import com.ts.vendor.Service.VendorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -35,6 +37,12 @@ public class VendorController {
         return categoryClient.getCategoryList();
     }
 
+    //    Method used for the global search to find categories by name
+    @GetMapping(value = "/allByLen")
+    public List<Vendor> getAllCategoriesByLen(int size, String search){
+
+        return vendorService.findNameBySearchTerm(search, new PageRequest(0, size)).getContent();
+    }
 
     @GetMapping(value = "/page")
     public Page<Vendor> findBySearchTerm(@RequestParam("search") String searchTerm, Pageable pageable) {
