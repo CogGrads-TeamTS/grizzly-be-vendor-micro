@@ -8,4 +8,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public interface VendorService {
     Page<Vendor> findBySearchTerm(@RequestParam("search") String searchTerm, Pageable pageable);
+    Page<Vendor> findNameBySearchTerm(String searchTerm, Pageable pageable);
 }

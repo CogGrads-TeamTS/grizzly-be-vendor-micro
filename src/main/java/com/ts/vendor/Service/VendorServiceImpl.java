@@ -18,5 +18,9 @@ public class VendorServiceImpl implements VendorService{
     public Page<Vendor> findBySearchTerm(String searchTerm, Pageable pageable){
         return vendorRepository.findBySearchTerm(searchTerm, pageable);
     }
+
+    public Page<Vendor> findNameBySearchTerm(String searchTerm, Pageable pageable){
+        return vendorRepository.findNameBySearchTerm(searchTerm, pageable);
+    }
 }
 
